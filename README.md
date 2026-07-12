@@ -2,7 +2,7 @@
 
 FundMetrics is a client-side mutual fund analytics dashboard designed for Indian mutual funds. It processes historical Net Asset Value (NAV) records entirely in-browser to compute performance, rolling distributions, risk-adjusted returns, and portfolio simulations.
 
-Live Demo (Original): https://fundlens.lovable.app/
+**Live Demo**: [https://kavinchandhrru.github.io/FundMetrics/](https://kavinchandhrru.github.io/FundMetrics/)
 
 ---
 
@@ -26,12 +26,28 @@ Live Demo (Original): https://fundlens.lovable.app/
 
 ---
 
-## Deployment & Hosting (GitHub Pages)
+## Local Development & Build
 
-This repository contains the built production assets optimized for rapid client-side delivery. You can host it on GitHub Pages for free:
+1. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+2. **Start development server**:
+   ```bash
+   npm run dev
+   ```
+3. **Build production bundle**:
+   ```bash
+   npm run build
+   ```
 
-1.  Create a new repository on GitHub (keep it **Public**).
-2.  Push these files to the repository.
-3.  Go to **Settings** -> **Pages** in your GitHub repo.
-4.  Under **Branch**, select `main` (root) and click **Save**.
-5.  Your site will be live at `https://<your-username>.github.io/<repo-name>/`.
+---
+
+## Deployment to GitHub Pages
+
+Since the app runs entirely in the browser with no backend, it is hosted on GitHub Pages:
+1. Ensure your repository is public on GitHub.
+2. Go to your repository's **Settings** -> **Pages**.
+3. Under **Build and deployment**, set the Source to **GitHub Actions**.
+4. Configure a static web build or deployment workflow to deploy the built assets to GitHub Pages.
+
