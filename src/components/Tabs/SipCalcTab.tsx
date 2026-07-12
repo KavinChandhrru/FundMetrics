@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import type { FundDetails } from '../../types/fund';
 import { simulateSip, fmtPct, fmtINR, fmtDate, yearsBetween } from '../../utils/financialMath';

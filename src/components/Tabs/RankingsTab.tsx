@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { TrendingUp, StopCircle, Loader2, Trophy } from 'lucide-react';
 import type { SchemeListItem, RankingEntry } from '../../types/fund';
 import { fetchSchemeList, fetchFundDetails, concurrentFetch } from '../../services/api';
-import { inceptionReturn, periodReturn, solveXirr, yearsBetween, fmtPct } from '../../utils/financialMath';
+import { periodReturn, solveXirr, fmtPct } from '../../utils/financialMath';
 import { cn } from '../../lib/utils';
 
 const HORIZONS = [

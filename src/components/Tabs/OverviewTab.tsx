@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,
   ResponsiveContainer,
@@ -65,7 +65,6 @@ export function OverviewTab({ fundData }: { fundData: FundDetails }) {
   }, [data]);
 
   const maxDrawdown = useMemo(() => calcMaxDrawdown(data), [data]);
-  const volatility  = useMemo(() => calcVolatility(data),  [data]);
   const sharpe      = useMemo(() => calcSharpe(data, RF_RATE), [data]);
   const inceptionYears = useMemo(() =>
     data.length > 1 ? yearsBetween(data[0].date, latestNav.date) : 0, [data, latestNav]);

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import type { FundDetails } from '../../types/fund';
 import { calcRollingCagr, calcRollingStats, fmtPct, fmtDate } from '../../utils/financialMath';
