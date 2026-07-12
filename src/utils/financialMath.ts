@@ -301,15 +301,22 @@ export function calcBestWorst(navData: NavPoint[], windowDays: number): BestWors
   const rolling = calcRollingCagr(navData, windowDays);
   if (rolling.length === 0) return null;
 
-  let bestIdx = 0;
-  let worstIdx = 0;
-
-  for (let i = 1; i < rolling.length; i++) {
-    if (rolling[i].cagrPct > rolling[bestIdx].cagrPct) bestIdx = i;
-    if (rolling[i].cagrPct < rolling[worstIdx].cagrPct) worstIdx = i;
-  }
-
   const sorted = [...rolling].sort((a, b) => a.cagrPct - b.cagrPct);
+  
+  // Worst 5
+  const worst = sorted.slice(0, 5).map(r => ({
+    pct: r.cagrPct,
+    end: r.date,
+    start: addDays(r.date, -windowDays),
+  }));
+
+  // Best 5
+  const best = sorted.slice(-5).reverse().map(r => ({
+    pct: r.cagrPct,
+    end: r.date,
+    start: addDays(r.date, -windowDays),
+  }));
+
   const mid = Math.floor(sorted.length / 2);
   const median =
     sorted.length % 2 === 0
@@ -317,16 +324,8 @@ export function calcBestWorst(navData: NavPoint[], windowDays: number): BestWors
       : sorted[mid].cagrPct;
 
   return {
-    best: {
-      pct: rolling[bestIdx].cagrPct,
-      end: rolling[bestIdx].date,
-      start: addDays(rolling[bestIdx].date, -windowDays),
-    },
-    worst: {
-      pct: rolling[worstIdx].cagrPct,
-      end: rolling[worstIdx].date,
-      start: addDays(rolling[worstIdx].date, -windowDays),
-    },
+    best,
+    worst,
     median,
     count: rolling.length,
   };

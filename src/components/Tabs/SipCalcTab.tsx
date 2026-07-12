@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import type { FundDetails } from '../../types/fund';
 import { simulateSip, fmtPct, fmtINR, fmtDate, yearsBetween } from '../../utils/financialMath';
@@ -14,10 +14,22 @@ export function SipCalcTab({ fundData }: { fundData: FundDetails }) {
     return Math.max(1, Math.floor(yearsBetween(data[0].date, data[data.length - 1].date)));
   }, [data]);
 
+  const defaultExpenseRatio = useMemo(() => {
+    const name = fundData.meta.scheme_name.toLowerCase();
+    if (name.includes('etf') || name.includes('index')) return 0.2;
+    if (name.includes('direct')) return 0.65;
+    if (name.includes('regular')) return 1.5;
+    return 1.0;
+  }, [fundData.meta.scheme_name]);
+
   const [monthly,      setMonthly]      = useState(10_000);
   const [lumpsum,      setLumpsum]      = useState(0);
   const [years,        setYears]        = useState(Math.min(10, maxYears));
-  const [expenseRatio, setExpenseRatio] = useState(1.0);
+  const [expenseRatio, setExpenseRatio] = useState(defaultExpenseRatio);
+
+  useEffect(() => {
+    setExpenseRatio(defaultExpenseRatio);
+  }, [defaultExpenseRatio]);
 
   const result = useMemo(
     () => simulateSip(data, { monthly, lumpsum, years, expenseRatio }),

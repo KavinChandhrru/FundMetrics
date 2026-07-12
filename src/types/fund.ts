@@ -59,8 +59,8 @@ export interface WindowResult {
 
 /** Output of the best/worst windows analysis */
 export interface BestWorstResult {
-  best: WindowResult;
-  worst: WindowResult;
+  best: WindowResult[];
+  worst: WindowResult[];
   median: number;
   count: number;
 }

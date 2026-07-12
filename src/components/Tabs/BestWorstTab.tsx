@@ -12,40 +12,54 @@ const WINDOWS = [
   { label: '5Y',  days: 1825 },
 ];
 
-function WindowCard({
+function WindowTable({
   title,
-  pct,
-  start,
-  end,
+  data,
   type,
 }: {
   title: string;
-  pct: number;
-  start: Date;
-  end: Date;
+  data: Array<{ pct: number; start: Date; end: Date }>;
   type: 'best' | 'worst';
 }) {
   return (
-    <div
-      className={cn(
-        'rounded-xl border p-4 shadow-elegant',
-        type === 'best'
-          ? 'border-pos/30 bg-pos/5 dark:bg-pos/10'
-          : 'border-neg/30 bg-neg/5 dark:bg-neg/10',
-      )}
-    >
-      <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{title}</p>
-      <p
+    <div className="rounded-xl border border-border bg-card shadow-elegant overflow-hidden">
+      <div
         className={cn(
-          'mt-1 text-3xl font-bold tabular-nums',
-          type === 'best' ? 'text-pos' : 'text-neg',
+          'px-4 py-3 border-b',
+          type === 'best' ? 'bg-pos/5 dark:bg-pos/10 border-pos/20' : 'bg-neg/5 dark:bg-neg/10 border-neg/20'
         )}
       >
-        {fmtPct(pct, 2)}
-      </p>
-      <p className="mt-2 text-xs text-muted-foreground">
-        {fmtDate(start)} → {fmtDate(end)}
-      </p>
+        <h3 className="font-semibold tracking-tight">{title}</h3>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b bg-muted/50 text-muted-foreground">
+              <th className="px-4 py-2 text-left font-medium">Rank</th>
+              <th className="px-4 py-2 text-left font-medium">Period</th>
+              <th className="px-4 py-2 text-right font-medium">Return</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y">
+            {data.map((row, i) => (
+              <tr key={i} className="hover:bg-muted/50 transition-colors">
+                <td className="px-4 py-2 text-muted-foreground">#{i + 1}</td>
+                <td className="px-4 py-2 tabular-nums">
+                  {fmtDate(row.start)} → {fmtDate(row.end)}
+                </td>
+                <td
+                  className={cn(
+                    'px-4 py-2 text-right font-medium tabular-nums',
+                    type === 'best' ? 'text-pos' : 'text-neg'
+                  )}
+                >
+                  {fmtPct(row.pct, 2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -87,19 +101,15 @@ export function BestWorstTab({ fundData }: { fundData: FundDetails }) {
         </div>
       ) : (
         <>
-          <div className="grid gap-4 md:grid-cols-2">
-            <WindowCard
-              title={`Best ${selectedWindow.label} window`}
-              pct={result.best.pct}
-              start={result.best.start}
-              end={result.best.end}
+          <div className="grid gap-6 md:grid-cols-2">
+            <WindowTable
+              title={`Top 5 ${selectedWindow.label} Windows`}
+              data={result.best}
               type="best"
             />
-            <WindowCard
-              title={`Worst ${selectedWindow.label} window`}
-              pct={result.worst.pct}
-              start={result.worst.start}
-              end={result.worst.end}
+            <WindowTable
+              title={`Bottom 5 ${selectedWindow.label} Windows`}
+              data={result.worst}
               type="worst"
             />
           </div>

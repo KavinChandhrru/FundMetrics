@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TrendingUp } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { Toaster } from 'sonner';
 import { FundSearchBar } from './components/Search/FundSearchBar';
@@ -20,7 +21,7 @@ const TABS = [
   { key: 'rolling',   label: 'Rolling'   },
   { key: 'bestworst', label: 'Best/Worst'},
   { key: 'annual',    label: 'Annual'    },
-  { key: 'sip',       label: 'SIP Calc'  },
+  { key: 'sip',       label: 'SIP'       },
   { key: 'compare',   label: 'Compare'   },
   { key: 'rankings',  label: 'Rankings'  },
   { key: 'portfolio', label: 'Portfolio' },
@@ -74,7 +75,12 @@ export default function App() {
       <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3">
           <div className="flex items-center gap-2 shrink-0">
-            <span className="text-lg font-extrabold tracking-tight">FundMetrics</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/60 text-primary-foreground shadow-sm">
+              <TrendingUp className="h-5 w-5" />
+            </div>
+            <span className="text-xl font-extrabold tracking-tight bg-gradient-to-br from-foreground to-foreground/70 bg-clip-text text-transparent">
+              FundMetrics
+            </span>
           </div>
           <div className="flex-1">
             <FundSearchBar onSelect={handleSelect} variant="header" />
