@@ -42,12 +42,3 @@ FundMetrics is a client-side mutual fund analytics dashboard designed for Indian
    ```
 
 ---
-
-## Deployment to GitHub Pages
-
-Since the app runs entirely in the browser with no backend, it is hosted on GitHub Pages:
-1. Ensure your repository is public on GitHub.
-2. Go to your repository's **Settings** -> **Pages**.
-3. Under **Build and deployment**, set the Source to **GitHub Actions**.
-4. Configure a static web build or deployment workflow to deploy the built assets to GitHub Pages.
-
