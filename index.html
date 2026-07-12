@@ -4,7 +4,44 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FundMetrics — Indian Mutual Fund Analysis</title>
+
+    <!-- SEO -->
+    <title>FundMetrics — Indian Mutual Fund Analytics</title>
+    <meta name="description" content="Analyse Indian mutual funds: NAV history, rolling CAGR, SIP &amp; lumpsum calculator with expense-ratio modelling, risk metrics, and side-by-side fund comparison. All client-side, no servers." />
+    <meta name="author" content="FundMetrics" />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="FundMetrics — Indian Mutual Fund Analytics" />
+    <meta property="og:description" content="Analyse Indian mutual funds: NAV history, rolling CAGR, SIP calculator, risk metrics and fund comparison — fully client-side." />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="FundMetrics — Indian Mutual Fund Analytics" />
+    <meta name="twitter:description" content="Analyse Indian mutual funds: NAV history, rolling CAGR, SIP calculator, risk metrics and fund comparison — fully client-side." />
+
+    <!--
+      Content Security Policy:
+      - Scripts from self only (no inline unsafe-eval)
+      - Styles from self + Google Fonts
+      - Fonts from Google Fonts
+      - Connects to mfapi.in (data API) and fonts.googleapis.com
+      - Frames, objects, and base-uri all restricted
+    -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self';
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self' https://api.mfapi.in;
+      img-src 'self' data:;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+    " />
+
+    <!-- Referrer policy -->
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
   </head>
   <body>
     <div id="root"></div>
